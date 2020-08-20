@@ -7,7 +7,7 @@ trace = trace(1:(totalTimeWithRem-rem(totalTimeWithRem,binSz)),:);
 totalTime = size(trace,1);
 binnedTrace = reshape(trace,binSz,totalTime/binSz,numTrials);
 if numTrials>1
-    binnedTrace = squeeze(sum(binnedTrace,1))';
+    binnedTrace = squeeze(mean(binnedTrace,1))';
 else
-    binnedTrace = squeeze(sum(binnedTrace,1));
+    binnedTrace = squeeze(mean(binnedTrace,1));
 end
