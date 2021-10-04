@@ -1,8 +1,7 @@
-function binary = times2Binary(eventTimes,alignmemtTime,window,len)
+function binary = times2Binary(eventTimes,alignmemtTime,window)
 
-ts = alignmemtTime + window;
+eventTimes = eventTimes - alignmemtTime;
 eventInds = ceil(eventTimes);
-eventInds(eventInds==0) = 1; % if an event is at time 0, move to 1.
-binary = zeros (len,1);
-binary(eventInds) = 1;
-binary = binary (ts);
+eventInds = intersect(eventInds,window);
+binary = zeros (length(window),1);
+binary(eventInds-min(window)+1) = 1;
