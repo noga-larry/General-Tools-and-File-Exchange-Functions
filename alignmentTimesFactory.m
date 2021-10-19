@@ -24,7 +24,7 @@ switch alignTo
             end
         end 
         
-    case  'pursuitLatency'
+    case  'pursuitLatencyTemplateFit'
         
         % plave nans in filed trials
         bool_fail = [data.trials(ind).fail];        
@@ -35,6 +35,19 @@ switch alignTo
         for t=1:length(ind)
              alignmentTimes(t) = data.trials(ind(t)).movement_onset +...
                  latency(t);
+        end
+        
+    case  'pursuitLatencyRMS'
+        
+        % plave nans in filed trials
+        bool_fail = [data.trials(ind).fail];
+        [latency_tmp]  =....
+            fitPursuitLatencyByRMS(data,ind(~bool_fail));
+        latency = nan(1,length(ind));
+        latency(~bool_fail) = latency_tmp;
+        for t=1:length(ind)
+            alignmentTimes(t) = data.trials(ind(t)).movement_onset +...
+                latency(t);
         end
 end
 end
