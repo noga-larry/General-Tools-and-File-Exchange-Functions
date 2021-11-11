@@ -11,15 +11,13 @@ function p_val = permutationTest(samples,labels,repeats,statistic_func)
 % Outputs:
 % p_val  - The p-value of the test.
 
-
-
-true_diff = statistic_func(samples(labels==0)) - statistic_func(samples(labels==1));
+true_diff = statistic_func(samples(:,labels==0)) - statistic_func(samples(:,labels==1));
 
 permuted_diffs = nan(1,repeats);
 for i=1:repeats
-    perm_data = samples(randperm(length(samples)));
+    perm_data = samples(:,randperm(length(samples)));
     permuted_diffs(i) = ...
-        statistic_func(perm_data(labels==0))-statistic_func(perm_data(labels==1));
+        statistic_func(perm_data(:,labels==0))-statistic_func(perm_data(:,labels==1));
 end
 
 p_val = mean(abs(permuted_diffs) >= abs (true_diff)); 
