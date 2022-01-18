@@ -49,5 +49,7 @@ switch alignTo
             alignmentTimes(t) = data.trials(ind(t)).movement_onset +...
                 latency(t);
         end
+    otherwise
+        disp('Alignmrnt not found')
 end
 end
