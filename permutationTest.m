@@ -1,4 +1,5 @@
-function p_val = permutationTest(samples,labels,repeats,statistic_func)
+function p_val = permutationTest(samples,labels,repeats,...
+    statistic_func,plot_flag)
 % This functon performs a two tail permulation test between to groups. 
 % The statistic is the difference between some a statistic function of the
 % two groups detemined by the inputs. 
@@ -11,6 +12,10 @@ function p_val = permutationTest(samples,labels,repeats,statistic_func)
 % Outputs:
 % p_val  - The p-value of the test.
 
+if nargin<5
+    plot_flag=false;
+end
+
 true_diff = statistic_func(samples(:,labels==0)) - statistic_func(samples(:,labels==1));
 
 permuted_diffs = nan(1,repeats);
@@ -22,4 +27,10 @@ end
 
 p_val = mean(abs(permuted_diffs) >= abs (true_diff)); 
 
+if plot_flag
+    figure
+    histogram(permuted_diffs,'Normalization','Probability')
+    xline(true_diff,'r','LineWidth',2)
+    xlabel('label 0 - label 1')
+end
 
