@@ -16,13 +16,13 @@ if nargin<5
     plot_flag=false;
 end
 
-true_diff = statistic_func(samples(:,labels==0)) - statistic_func(samples(:,labels==1));
+true_diff = statistic_func(samples(:,labels==1)) - statistic_func(samples(:,labels==0));
 
 permuted_diffs = nan(1,repeats);
 for i=1:repeats
     perm_data = samples(:,randperm(length(samples)));
     permuted_diffs(i) = ...
-        statistic_func(perm_data(:,labels==0))-statistic_func(perm_data(:,labels==1));
+        statistic_func(perm_data(:,labels==1))-statistic_func(perm_data(:,labels==0));
 end
 
 p_val = mean(abs(permuted_diffs) >= abs (true_diff)); 
@@ -31,6 +31,6 @@ if plot_flag
     figure
     histogram(permuted_diffs,'Normalization','Probability')
     xline(true_diff,'r','LineWidth',2)
-    xlabel('label 0 - label 1')
+    xlabel('label 1 - label 0')
 end
 
