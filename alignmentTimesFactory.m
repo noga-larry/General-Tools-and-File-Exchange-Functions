@@ -49,6 +49,15 @@ switch alignTo
             alignmentTimes(t) = data.trials(ind(t)).movement_onset +...
                 latency(t);
         end
+        
+    case  'correctiveSaccade'
+        RTs = saccadeRTs(data,ind,true);
+        motion = alignmentTimesFactory(data,ind,'targetMovementOnset');
+        alignmentTimes = motion + RTs;        
+        mean(isnan(RTs))
+        
+       
+        
     otherwise
         disp('Alignmrnt not found')
 end
