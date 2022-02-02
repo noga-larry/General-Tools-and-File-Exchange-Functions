@@ -13,6 +13,11 @@ function binary = times2Binary(eventTimes,alignmemtTime,window)
 %   binary -        A binary vector, the raster of the events from 
 %                   eventTimes in the window around alignmemtTime.
 
+if isnan(alignmemtTime)
+    binary = nan (length(window),1);
+    return
+end
+
 eventTimes = eventTimes - alignmemtTime;
 eventInds = ceil(eventTimes);
 eventInds = intersect(eventInds,window);
