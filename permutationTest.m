@@ -20,7 +20,7 @@ true_diff = statistic_func(samples(:,labels==1)) - statistic_func(samples(:,labe
 
 permuted_diffs = nan(1,repeats);
 for i=1:repeats
-    perm_data = samples(:,randperm(length(samples)));
+    perm_data = samples(:,randperm(size(samples,2)));
     permuted_diffs(i) = ...
         statistic_func(perm_data(:,labels==1))-statistic_func(perm_data(:,labels==0));
 end
