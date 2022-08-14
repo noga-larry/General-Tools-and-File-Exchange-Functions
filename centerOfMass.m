@@ -1,4 +1,4 @@
-function [PD,ind_PD] = centerOfMass (TC, directions)
+function [PD,ind_PD,PD_exact] = centerOfMass (TC, directions)
 % This function finds the PD of a cll given its tuning curve and the
 % experimantal directions using the center of mass.
 % Inputs:    TC         The tuning curce of the cell
@@ -10,7 +10,7 @@ function [PD,ind_PD] = centerOfMass (TC, directions)
 
 v_x = cosd(directions)*TC;
 v_y = sind(directions)*TC;
-pd_exact = mod(atan2d(v_y,v_x),360);
-dist = abs(directions-pd_exact);
+PD_exact = mod(atan2d(v_y,v_x),360);
+dist = abs(directions-PD_exact);
 [~,ind_PD] = min(dist);
 PD = directions(ind_PD);
