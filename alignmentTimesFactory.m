@@ -39,7 +39,7 @@ switch alignTo
         
     case  'pursuitLatencyRMS'
         
-        % plave nans in filed trials
+        % place nans in failed trials
         bool_fail = [data.trials(ind).fail];
         [latency_tmp]  =....
             fitPursuitLatencyByRMS(data,ind(~bool_fail));
@@ -59,6 +59,6 @@ switch alignTo
        
         
     otherwise
-        disp('Alignmrnt not found')
+        disp('Alignment not found')
 end
 end
