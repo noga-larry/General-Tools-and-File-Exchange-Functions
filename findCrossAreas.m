@@ -10,7 +10,7 @@ function [crossAreas] = findCrossAreas(vector, threshold)
 %   indicating the end index of the area.
 
 % Find where the vector crosses the threshold
-crossIndices = find(diff(sign(vector - threshold)));
+crossIndices = find(diff((vector - threshold)>0));
 
 % Check if there are any crossing areas
 if isempty(crossIndices)
@@ -18,14 +18,14 @@ if isempty(crossIndices)
     return
 end
 
-% Check if the first crossing is a crossing down or up
-if sign(vector(crossIndices(1))) < 0
-    crossIndices = crossIndices(2:end);
+% check if begins with crossing
+if (vector(1) - threshold(1)) > 0 
+    crossIndices = [1 crossIndices];
 end
 
-% Check if the last crossing is a crossing down or up
-if sign(vector(crossIndices(end))) > 0
-    crossIndices = crossIndices(1:end-1);
+% check if ends with crossing
+if (vector(end) - threshold(end)) > 0 
+    crossIndices = [crossIndices length(vector)];
 end
 
 % Reshape the indices into pairs of start and end indices
