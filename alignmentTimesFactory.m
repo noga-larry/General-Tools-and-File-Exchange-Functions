@@ -57,7 +57,10 @@ switch alignTo
         mean(isnan(RTs))
         
        
-        
+    case 'saccadeLatency'
+        rts = saccadeRTs(data,ind);
+        target = alignmentTimesFactory(data,ind,'targetMovementOnset');
+        alignmentTimes = target+rts;
     otherwise
         disp('Alignment not found')
 end
