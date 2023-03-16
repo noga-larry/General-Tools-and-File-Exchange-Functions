@@ -14,6 +14,11 @@ switch alignTo
         for t=1:length(ind)
             alignmentTimes(t) = data.trials(ind(t)).movement_onset;
         end
+
+    case 'targetMovementOffset'
+        for t=1:length(ind)
+            alignmentTimes(t) = data.trials(ind(t)).movement_offset;
+        end
         
     case 'reward'
         for t=1:length(ind)
