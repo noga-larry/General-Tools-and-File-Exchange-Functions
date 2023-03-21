@@ -1,4 +1,17 @@
-function alignmentTimes = alignmentTimesFactory(data,ind,alignTo)
+function alignmentTimes = alignmentTimesFactory(data,ind,alignTo,varargin)
+
+
+
+p = inputParser;
+
+defaultFromExtended = false;
+
+addOptional(p,'fromExtended',defaultFromExtended,@islogical);
+
+parse(p,varargin{:});
+
+takeFromExtended = p.Results.fromExtended;
+
 
 alignmentTimes = nan(1,length(ind));
 
@@ -66,7 +79,14 @@ switch alignTo
         rts = saccadeRTs(data,ind);
         target = alignmentTimesFactory(data,ind,'targetMovementOnset');
         alignmentTimes = target+rts;
+
+    case 'extended'
+        data.trials(ind).extended_trial_begin
+
     otherwise
         disp('Alignment not found')
 end
+
+if takeFromExtended
+    alignmentTimes = [data.trials(ind).extended_trial_begin]+alignmentTimes;
 end
