@@ -1,6 +1,19 @@
 function alignmentTimes = alignmentTimesFactory(data,ind,alignTo,varargin)
 
-
+% alignmentTimesFactory generates alignment times for specified trials and 
+% alignment type.
+%
+% Inputs:
+%   data - Data structure containing relevant trial information.
+%   ind - Indices of the relevant trials.
+%   alignTo - The event or timing to which the alignment should be performed.
+%   varargin - Additional optional arguments.
+%     'fromExtended' - Logical flag indicating whether to take alignment
+%   times from extended data.
+%
+% Output:
+%   alignmentTimes - Array of alignment times corresponding to each trial in 'ind'.
+%
 
 p = inputParser;
 
